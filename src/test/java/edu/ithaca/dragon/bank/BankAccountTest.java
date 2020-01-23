@@ -23,10 +23,10 @@ class BankAccountTest {
 
     @Test
     void isEmailPrefixValidTest(){
-        assertFalse(BankAccount.isEmailValid( "abc-@mail.com"));
-        assertFalse(BankAccount.isEmailValid( "abc..def@mail.com"));
-        assertFalse(BankAccount.isEmailValid( ".abc@mail.com"));
-        assertFalse(BankAccount.isEmailValid( "abc#def@mail.com"));
+        assertFalse(BankAccount.isEmailValid("abc-@mail.com"));
+        assertFalse(BankAccount.isEmailValid("abc..def@mail.com"));
+        assertFalse(BankAccount.isEmailValid(".abc@mail.com"));
+        assertFalse(BankAccount.isEmailValid("abc#def@mail.com"));
         assertTrue( BankAccount.isEmailValid("abc-d@mail.com"));
         assertTrue( BankAccount.isEmailValid("abc.def@mail.com"));
         assertTrue( BankAccount.isEmailValid("abc@mail.com"));
@@ -35,17 +35,15 @@ class BankAccountTest {
 
     @Test
     void isEmailDomainValidTest(){
-        assertFalse(BankAccount.isEmailValid( "abc.def@mail.c"));
-        assertFalse(BankAccount.isEmailValid( "abc.def@mail#archive.com"));
-        assertFalse(BankAccount.isEmailValid( "abc.def@mail"));
-        assertFalse(BankAccount.isEmailValid( "abc.def@mail..com"));
+        assertFalse(BankAccount.isEmailValid("abc.def@mail.c"));
+        assertFalse(BankAccount.isEmailValid("abc.def@mail#archive.com"));
+        assertFalse(BankAccount.isEmailValid("abc.def@mail"));
+        assertFalse(BankAccount.isEmailValid("abc.def@mail..com"));
         assertTrue( BankAccount.isEmailValid("abc.def@mail.cc"));
         assertTrue( BankAccount.isEmailValid("abc.def@mail-archive.com"));
         assertTrue( BankAccount.isEmailValid("abc.def@mail.org"));
         assertTrue( BankAccount.isEmailValid("abc.def@mail.com"));
     }
-
-
 
     @Test
     void constructorTest() {
