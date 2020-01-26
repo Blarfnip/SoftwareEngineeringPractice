@@ -31,10 +31,14 @@ public class BankAccount {
 
     /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
+     * @throws InsufficientFundsException if amount is greater than the balance
      */
-    public void withdraw (double amount)  {
-        balance -= amount;
-
+    public void withdraw (double amount) throws InsufficientFundsException {
+        if(balance - amount >= 0) {
+            balance -= amount;
+        } else {
+            throw new InsufficientFundsException("");
+        }
     }
 
     public static boolean isEmailValid(String email){
