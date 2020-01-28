@@ -28,6 +28,11 @@ class BankAccountTest {
 
         assertEquals(100, bankAccount.getBalance());
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw((300)));
+
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw((20.00002)));
+        bankAccount.withdraw(100);
+        assertEquals(0, bankAccount.getBalance());
+
     }
 
     @Test
@@ -79,8 +84,8 @@ class BankAccountTest {
         assertTrue(BankAccount.isEmailValid("abc@mail.com"));
         assertTrue(BankAccount.isEmailValid("abc@ma-il.com"));
         assertTrue(BankAccount.isEmailValid("abc@ma-1-l.com"));
-        assertFalse(BankAccount.isEmailValid("abc@ma_il.com"));
-        assertFalse(BankAccount.isEmailValid("abc@ma.il.com"));
+        assertTrue(BankAccount.isEmailValid("abc@ma_il.com"));
+        assertTrue(BankAccount.isEmailValid("abc@ma.il.com"));
         assertFalse(BankAccount.isEmailValid("abc@mail.c"));
         assertFalse(BankAccount.isEmailValid("abc@mail."));
         assertFalse(BankAccount.isEmailValid("abc@mail"));
