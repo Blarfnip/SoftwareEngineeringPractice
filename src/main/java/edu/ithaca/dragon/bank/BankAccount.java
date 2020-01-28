@@ -34,7 +34,8 @@ public class BankAccount {
      * @throws InsufficientFundsException if amount is greater than the balance
      */
     public void withdraw (double amount) throws InsufficientFundsException {
-        if((double)(Math.round(amount * 100)) / 100 != amount) throw new IllegalArgumentException();
+        //Check for inputs with non-monetary fractions
+        if(!isAmountValid(amount)) throw new IllegalArgumentException();
 
         if(balance - amount >= 0) {
             balance -= amount;
@@ -43,7 +44,12 @@ public class BankAccount {
         }
     }
 
+    public static boolean isAmountValid(double amount) {
+        return ((double)(Math.round(amount * 100)) / 100 == amount && amount >= 0);
+    }
+
     public static boolean isEmailValid(String email){
+        //Pattern match regex for valid email address
         String regex = "[\\w-]+(\\.[\\w]+)*(?<![-_])@[\\w-]+([.-]?[\\w]+)*(\\.[a-z]{2,})";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(email);
