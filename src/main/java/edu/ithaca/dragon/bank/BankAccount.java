@@ -46,15 +46,22 @@ public class BankAccount {
      * @param amount to be deposited
      */
     public void deposit(double amount) {
-
+        if(!isAmountValid(amount))
+            throw new IllegalArgumentException("Amount " + amount + " is not a valid input");
+        balance += amount;
     }
 
     /**
      * @param account to transfer money to
      * @param amount to transfer
      */
-    public void transfer(BankAccount account, double amount) {
-
+    public void transfer(BankAccount account, double amount) throws  InsufficientFundsException{
+        if(!isAmountValid(amount))
+            throw new IllegalArgumentException(("Amount " + amount + " is not a valid input"));
+        if(amount > balance)
+            throw new InsufficientFundsException("Amount " + amount + " exceeds account balance");
+        withdraw(amount);
+        account.deposit(amount);
     }
 
     /**

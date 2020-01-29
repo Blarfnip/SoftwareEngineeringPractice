@@ -66,7 +66,7 @@ class BankAccountTest {
         assertEquals(100, b.getBalance());
         b.transfer(a, 0);
         assertEquals(300, a.getBalance());
-        assertEquals(300, b.getBalance());
+        assertEquals(100, b.getBalance());
 
         //Insufficient Funds
         assertThrows(InsufficientFundsException.class, () -> a.transfer(b, 500));
