@@ -36,6 +36,44 @@ class BankAccountTest {
     }
 
     @Test
+    void depositTest() {
+        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        //Invalid arguments
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit((-10)));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit((10.00002)));
+        //Valid arguments
+        bankAccount.deposit(100);
+        assertEquals(300, bankAccount.getBalance());
+        //Border case, 0
+        bankAccount.deposit(0);
+        assertEquals(300, bankAccount.getBalance());
+    }
+
+    @Test
+    void transferTest() throws InsufficientFundsException{
+        BankAccount a = new BankAccount("a@a.com", 200);
+        BankAccount b = new BankAccount("b@b.com", 200);
+        //Invalid arguments
+        assertThrows(IllegalArgumentException.class, () -> a.transfer(b, -200));
+        assertThrows(IllegalArgumentException.class, () -> a.transfer(b, 5.00003));
+
+        //Valid arguments
+        a.transfer(b, 100);
+        assertEquals(100, a.getBalance());
+        assertEquals(300, b.getBalance());
+        b.transfer(a, 200);
+        assertEquals(300, a.getBalance());
+        assertEquals(100, b.getBalance());
+        b.transfer(a, 0);
+        assertEquals(300, a.getBalance());
+        assertEquals(300, b.getBalance());
+
+        //Insufficient Funds
+        assertThrows(InsufficientFundsException.class, () -> a.transfer(b, 500));
+
+    }
+
+    @Test
     void isEmailValidTest(){
         //prefix
         assertFalse(BankAccount.isEmailValid("abc-@mail.com"));

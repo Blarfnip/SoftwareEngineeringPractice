@@ -43,6 +43,21 @@ public class BankAccount {
     }
 
     /**
+     * @param amount to be deposited
+     */
+    public void deposit(double amount) {
+
+    }
+
+    /**
+     * @param account to transfer money to
+     * @param amount to transfer
+     */
+    public void transfer(BankAccount account, double amount) {
+
+    }
+
+    /**
      * @param amount input for validity checking
      * @return boolean denoting validity of amount
      */
