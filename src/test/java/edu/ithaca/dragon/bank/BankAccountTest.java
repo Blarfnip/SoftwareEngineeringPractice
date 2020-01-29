@@ -8,6 +8,8 @@ class BankAccountTest {
 
     @Test
     void getBalanceTest() {
+        assertTrue(BankAccount.isEmailValid("a@b.com"));
+
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
 
         assertEquals(200, bankAccount.getBalance());
@@ -16,9 +18,7 @@ class BankAccountTest {
 
         assertEquals(0, bankAccount.getBalance());
 
-        bankAccount = new BankAccount("a@b.com", -200);
-
-        assertEquals(-200, bankAccount.getBalance());
+        assertThrows(IllegalArgumentException.class, () -> new BankAccount("a@b.com", -200));
     }
 
     @Test

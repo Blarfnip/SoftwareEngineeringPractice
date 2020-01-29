@@ -12,13 +12,11 @@ public class BankAccount {
      * @throws IllegalArgumentException if email is invalid
      */
     public BankAccount(String email, double startingBalance){
-        if (isEmailValid(email)){
-            this.email = email;
-            this.balance = startingBalance;
-        }
-        else {
-            throw new IllegalArgumentException("Email address: " + email + " is invalid, cannot create account");
-        }
+        if(!isEmailValid(email)) throw new IllegalArgumentException("Email " + email + " is invalid");
+        if(!isAmountValid(startingBalance)) throw new IllegalArgumentException("Starting Balance " + startingBalance + " is invalid");
+
+        this.email = email;
+        this.balance = startingBalance;
     }
 
     public double getBalance(){
@@ -44,10 +42,18 @@ public class BankAccount {
         }
     }
 
+    /**
+     * @param amount input for validity checking
+     * @return boolean denoting validity of amount
+     */
     public static boolean isAmountValid(double amount) {
         return ((double)(Math.round(amount * 100)) / 100 == amount && amount >= 0);
     }
 
+    /**
+     * @param email input for validity checking
+     * @return boolean denoting validity of email
+     */
     public static boolean isEmailValid(String email){
         //Pattern match regex for valid email address
         String regex = "[\\w-]+(\\.[\\w]+)*(?<![-_])@[\\w-]+([.-]?[\\w]+)*(\\.[a-z]{2,})";
