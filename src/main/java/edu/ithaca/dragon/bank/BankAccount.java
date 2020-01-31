@@ -56,6 +56,8 @@ public class BankAccount {
      * @param amount to transfer
      */
     public void transfer(BankAccount account, double amount) throws  InsufficientFundsException{
+        if(this == account)
+            throw new IllegalArgumentException("Cannot transfer to own account");
         if(!isAmountValid(amount))
             throw new IllegalArgumentException(("Amount " + amount + " is not a valid input"));
         if(amount > balance)

@@ -55,6 +55,7 @@ class BankAccountTest {
         BankAccount b = new BankAccount("b@b.com", 200);
         //Invalid arguments
         assertThrows(IllegalArgumentException.class, () -> a.transfer(b, -200));
+        assertThrows(IllegalArgumentException.class, () -> a.transfer(a, 100));
         assertThrows(IllegalArgumentException.class, () -> a.transfer(b, 5.00003));
 
         //Valid arguments
